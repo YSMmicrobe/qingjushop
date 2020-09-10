@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baizhi.dao.IOrderDao">
+    <resultMap id="ordersMap" type="order">
+        <id column="id" property="id"/>
+        <result column="orderNum" property="orderNum"/>
+        <result column="orderTime" property="orderTime"/>
+        <result column="peopleCount" property="peopleCount"/>
+        <result column="orderStatus" property="orderStatus"/>
+        <result column="orderDesc" property="orderDesc"/>
+        <result column="payType" property="payType"/>
+        <association property="product" column="productId"  select="com.baizhi.dao.IProductDao.selectById"/>
+    </resultMap>
+
+    <resultMap id="orderMap" type="order">
+        <id column="id" property="id"/>
+        <result column="orderNum" property="orderNum"/>
+        <result column="orderTime" property="orderTime"/>
+        <result column="peopleCount" property="peopleCount"/>
+        <result column="orderStatus" property="orderStatus"/>
+        <result column="orderDesc" property="orderDesc"/>
+        <result column="payType" property="payType"/>
+        <association property="product" column="productId"  select="com.baizhi.dao.IProductDao.selectById" javaType="product"/>
+        <association property="member" column="memberId" select="com.baizhi.dao.IMemberDao.selectById" javaType="member"/>
+        <collection property="travellers" column="id" select="com.baizhi.dao.ITravellerDao.selectAllById" ofType="Traveller" javaType="java.util.List"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="ordersMap">
+        select * from orders
+    </select>
+
+    <select id="selectById" resultMap="orderMap">
+        select * from orders where ID=#{id}
+    </select>
+</mapper>
