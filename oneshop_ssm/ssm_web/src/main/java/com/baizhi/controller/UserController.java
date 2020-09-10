@@ -15,6 +15,10 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+    /**
+     * 查询全部用户
+     * @return
+     */
     @RequestMapping("/selectAll")
     public ModelAndView selectAll(){
         ModelAndView mv = new ModelAndView();
@@ -24,6 +28,11 @@ public class UserController {
         return mv;
     }
 
+    /**
+     * 根据id查询用户详情
+     * @param id
+     * @return
+     */
     @RequestMapping("/findById")
     public ModelAndView selectById(String id){
         ModelAndView mv = new ModelAndView();
@@ -33,7 +42,22 @@ public class UserController {
         return mv;
     }
 
-    //findUserByIdAndAllRole
+    /**
+     * 添加用户基本信息
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping("/save")
+    public String addUser(UserInfo userInfo){
+        userService.insertOne(userInfo);
+        return "redirect:selectAll";
+    }
+
+
+    /**
+     *
+     * @return
+     */
     @RequestMapping("/selectUserByIdAndAllRole")
     public ModelAndView selectUserByIdAndAllRole(){
         ModelAndView mv = new ModelAndView();

@@ -37,15 +37,15 @@
 							class="fa fa-circle-o"></i> 用户管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/role/findAll.do"> <i
+						href="${pageContext.request.contextPath}/role/selectAll"> <i
 							class="fa fa-circle-o"></i> 角色管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/permission/findAll.do">
+						href="${pageContext.request.contextPath}/permission/selectAll">
 							<i class="fa fa-circle-o"></i> 资源权限管理
 					</a></li>
 					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/sysLog/findAll.do"> <i
+						href="${pageContext.request.contextPath}/sysLog/selectAll"> <i
 							class="fa fa-circle-o"></i> 访问日志
 					</a></li>
 				</ul></li>

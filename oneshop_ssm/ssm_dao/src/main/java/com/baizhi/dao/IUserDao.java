@@ -11,5 +11,6 @@ public interface IUserDao {
 
     List<UserInfo> selectAll();
 
+    void insertOne(UserInfo userInfo);
 
 }

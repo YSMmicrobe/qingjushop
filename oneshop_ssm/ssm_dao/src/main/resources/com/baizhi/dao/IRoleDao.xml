@@ -12,4 +12,7 @@
     <select id="selectRolesById" resultMap="rolesMap"                                                                                                                            >
         select * from ROLE where ID in (select ROLEID from USERS_ROLE where USERID=#{userId})
     </select>
+    <select id="selectAll" resultType="Role">
+        select * from ROLE
+    </select>
 </mapper>

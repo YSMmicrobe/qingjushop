@@ -70,4 +70,9 @@ public class UserServiceImpl implements IUserService {
     public List<UserInfo> selectAll() {
         return userDao.selectAll();
     }
+
+    @Override
+    public void insertOne(UserInfo userInfo) {
+        userDao.insertOne(userInfo);
+    }
 }

@@ -24,4 +24,13 @@
         select * from users
     </select>
 
+    <insert id="insertOne">
+        insert into USERS (EMAIL, USERNAME, PASSWORD, PHONENUM, STATUS) values (
+          #{email},
+          #{username},
+          #{password},
+          #{phoneNum},
+          #{status}
+        )
+    </insert>
 </mapper>
