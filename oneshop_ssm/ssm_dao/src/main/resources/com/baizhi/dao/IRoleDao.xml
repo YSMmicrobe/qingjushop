@@ -9,10 +9,46 @@
         <result column="roleDesc" property="roleDesc"/>
         <collection property="permissions" column="id" select="com.baizhi.dao.IPermissionDao.selectById"/>
     </resultMap>
-    <select id="selectRolesById" resultMap="rolesMap"                                                                                                                            >
+
+    <select id="selectRolesById" resultMap="rolesMap">
         select * from ROLE where ID in (select ROLEID from USERS_ROLE where USERID=#{userId})
     </select>
+
+    <select id="selectRoleById" resultMap="rolesMap">
+        select * from ROLE where ID = #{id}
+    </select>
+
     <select id="selectAll" resultType="Role">
         select * from ROLE
     </select>
+
+    <insert id="insert">
+        insert into ROLE (ROLENAME,ROLEDESC) values (
+          #{roleName},
+          #{roleDesc}
+        )
+    </insert>
+
+    <delete id="deleteOne" >
+        delete from ROLE where ID=#{id}
+    </delete>
+
+    <delete id="deleteRoleConnectUser">
+        delete from USERS_ROLE where ROLEID = #{roleId}
+    </delete>
+
+    <delete id="deleteRoleConnectPermission">
+        delete from ROLE_PERMISSION where ROLEID = #{roleId}
+    </delete>
+
+    <select id="showPermissionNotInRole" resultType="Permission">
+        select * from PERMISSION where ID not in (select PERMISSIONID from ROLE_PERMISSION where ROLEID = #{roleId})
+    </select>
+
+    <insert id="addPermissionToRole">
+        insert into ROLE_PERMISSION (PERMISSIONID, ROLEID)
+        <foreach collection="permissionIds" item="permissionId" separator="union all">
+            select #{permissionId},#{roleId} from dual
+        </foreach>
+    </insert>
 </mapper>

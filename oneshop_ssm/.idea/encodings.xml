@@ -2,6 +2,6 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/ssm_web" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/test_webxml1" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ssm_web/src/main/java/com/baizhi/controller/RoleController.java" charset="GBK" />
   </component>
 </project>

@@ -6,4 +6,10 @@
     <select id="selectById" resultType="Permission">
         select * from PERMISSION where ID in (select PERMISSIONID from ROLE_PERMISSION where ROLEID=#{id})
     </select>
+    <select id="selectAll" resultType="Permission">
+        select * from PERMISSION
+    </select>
+    <insert id="insertOne">
+        insert into PERMISSION (PERMISSIONNAME, URL) values (#{permissionName},#{url})
+    </insert>
 </mapper>

@@ -9,4 +9,6 @@ public interface IPermissionDao {
     List<Permission> selectById(String id);
     //
     List<Permission> selectAll();
+    //
+    void insertOne(Permission permission);
 }

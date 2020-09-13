@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,9 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserDao userDao;
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserInfo userInfo = userDao.selectByName(username);
@@ -29,7 +33,7 @@ public class UserServiceImpl implements IUserService {
         //
 //        User user = new User(userInfo.getUsername(),"{noop}"+userInfo.getPassword(),getAuthoritie(userInfo.getRoles()));
         User user = new User(userInfo.getUsername(),
-                "{noop}"+userInfo.getPassword(),
+                userInfo.getPassword(),
                 userInfo.getStatus()==0?false:true,
                 true,
                 true,
@@ -53,7 +57,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     *
+     *  根据id查询用户详细信息
      * @param userId
      * @return
      */
@@ -71,8 +75,25 @@ public class UserServiceImpl implements IUserService {
         return userDao.selectAll();
     }
 
+    /**
+     * 插入用户
+     * @param userInfo
+     */
     @Override
     public void insertOne(UserInfo userInfo) {
+        //对密码进行加密
+        userInfo.setPassword(bCryptPasswordEncoder.encode(userInfo.getPassword()));
         userDao.insertOne(userInfo);
+    }
+
+    @Override
+    public List<Role> selectRoleNoInUser(String userId) {
+
+        return userDao.selectRoleNoInUser(userId);
+    }
+
+    @Override
+    public void addRoleToUser(String userId, String[] RoleId) {
+        userDao.addRoleToUser(userId,RoleId);
     }
 }

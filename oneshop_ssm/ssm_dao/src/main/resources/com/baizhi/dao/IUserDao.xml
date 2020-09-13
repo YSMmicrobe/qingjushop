@@ -33,4 +33,18 @@
           #{status}
         )
     </insert>
+
+    <select id="selectRoleNoInUser" resultType="Role">
+       select * from role where id not in (select roleId from users_role where userId = #{userId})
+    </select>
+
+    <insert id="addRoleToUser">
+        insert into USERS_ROLE (USERID, ROLEID)
+        <foreach collection="roleIds" item="roleId" separator="union all">
+            select
+              #{userId},
+              #{roleId}
+            from dual
+        </foreach>
+    </insert>
 </mapper>

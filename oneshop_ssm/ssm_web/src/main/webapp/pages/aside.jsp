@@ -1,3 +1,4 @@
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
 	pageEncoding="UTF-8"%>
 
@@ -11,7 +12,7 @@
 					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>xxx</p>
+				<p><security:authentication property="principal.username"/></p>
 				<a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
 			</div>
 		</div>
@@ -32,10 +33,14 @@
 			</a>
 				<ul class="treeview-menu">
 
-					<li id="system-setting"><a
-						href="${pageContext.request.contextPath}/user/selectAll"> <i
+					<li id="system-setting">
+						<security:authorize access="hasRole('ADMIN')">
+						<a href="${pageContext.request.contextPath}/user/selectAll"> <i
 							class="fa fa-circle-o"></i> 用户管理
-					</a></li>
+						</a>
+						</security:authorize>
+
+					</li>
 					<li id="system-setting"><a
 						href="${pageContext.request.contextPath}/role/selectAll"> <i
 							class="fa fa-circle-o"></i> 角色管理

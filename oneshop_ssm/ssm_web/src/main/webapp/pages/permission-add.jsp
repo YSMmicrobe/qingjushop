@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
+ v<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -79,35 +79,35 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				角色管理 <small>角色表单</small>
+				权限管理 <small>权限表单</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
-				<li><a href="${pageContext.request.contextPath}/role/findAll.do">角色管理</a></li>
-				<li class="active">角色表单</li>
+				<li><a href="${pageContext.request.contextPath}/role/findAll.do">权限管理</a></li>
+				<li class="active">权限表单</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 
-			<form action="${pageContext.request.contextPath}/role/insert"
+			<form action="${pageContext.request.contextPath}/permission/insert"
 				method="post">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
 				<div class="panel panel-default">
-					<div class="panel-heading">角色信息</div>
+					<div class="panel-heading">权限信息</div>
 					<div class="row data-type">
 
-						<div class="col-md-2 title">角色名称</div>
+						<div class="col-md-2 title">权限名称</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="roleName"
-								placeholder="角色名称" value="">
+							<input type="text" class="form-control" name="permissionName"
+								placeholder="权限名称" value="">
 						</div>
-						<div class="col-md-2 title">角色描述</div>
+						<div class="col-md-2 title">权限描述</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="roleDesc"
-								placeholder="角色描述" value="">
+							<input type="text" class="form-control" name="url"
+								placeholder="URL" value="">
 						</div>
 										
 

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" isELIgnored="false"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -6,6 +6,7 @@
 <!-- 页面meta -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <title>数据 - AdminLTE2定制版</title>
 <meta name="description" content="AdminLTE2定制版">
 <meta name="keywords" content="AdminLTE2定制版">
@@ -62,13 +63,14 @@
 	href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
 
-	<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini">
 
 	<div class="wrapper">
 
 		<!-- 页面头部 -->
 		<jsp:include page="header.jsp"></jsp:include>
 		<!-- 页面头部 /-->
+
 		<!-- 导航侧栏 -->
 		<jsp:include page="aside.jsp"></jsp:include>
 		<!-- 导航侧栏 /-->
@@ -79,43 +81,83 @@
 			<!-- 内容头部 -->
 			<section class="content-header">
 			<h1>
-				角色管理 <small>角色表单</small>
+				产品管理 <small>产品表单</small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="${pageContext.request.contextPath}/index.jsp"><i
 						class="fa fa-dashboard"></i> 首页</a></li>
-				<li><a href="${pageContext.request.contextPath}/role/findAll.do">角色管理</a></li>
-				<li class="active">角色表单</li>
+				<li><a href="${pageContext.request.contextPath}/product/findAll.do">产品管理</a></li>
+				<li class="active">产品修改</li>
 			</ol>
 			</section>
 			<!-- 内容头部 /-->
 
-			<form action="${pageContext.request.contextPath}/role/insert"
+			<form action="${pageContext.request.contextPath}/product/update.do"
 				method="post">
+				<input type="hidden" name="id" value="${product.id}">
 				<!-- 正文区域 -->
 				<section class="content"> <!--产品信息-->
 
 				<div class="panel panel-default">
-					<div class="panel-heading">角色信息</div>
+					<div class="panel-heading">产品信息</div>
 					<div class="row data-type">
 
-						<div class="col-md-2 title">角色名称</div>
+						<div class="col-md-2 title">产品编号</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="roleName"
-								placeholder="角色名称" value="">
+							<input type="text" class="form-control" name="productNum"
+								placeholder="产品编号" value="${product.productNum}"
+								readonly="readonly">
 						</div>
-						<div class="col-md-2 title">角色描述</div>
+						<div class="col-md-2 title">产品名称</div>
 						<div class="col-md-4 data">
-							<input type="text" class="form-control" name="roleDesc"
-								placeholder="角色描述" value="">
+							<input type="text" class="form-control" name="productName"
+								placeholder="产品名称" value="${product.productName}">
 						</div>
-										
+						<div class="col-md-2 title">出发时间</div>
+						<div class="col-md-4 data">
+							<div class="input-group date">
+								<div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								</div>
+								<input type="text" class="form-control pull-right"
+									id="datepicker-a3" name="departureTime"
+									value="${product.departureTimeStr}">
+							</div>
+						</div>
+
+
+						<div class="col-md-2 title">出发城市</div>
+						<div class="col-md-4 data">
+							<input type="text" class="form-control" name="cityName"
+								placeholder="出发城市" value="${product.cityName}">
+						</div>
+
+						<div class="col-md-2 title">产品价格</div>
+						<div class="col-md-4 data">
+							<input type="text" class="form-control" placeholder="产品价格"
+								name="productPrice" value="${product.productPrice}">
+						</div>
+
+						<div class="col-md-2 title">产品状态</div>
+						<div class="col-md-4 data">
+							<select class="form-control select2" style="width: 100%"
+								name="productStatus">
+								<option value="0" selected="selected">关闭</option>
+								<option value="1">开启</option>
+							</select>
+						</div>
+
+						<div class="col-md-2 title rowHeight2x">其他信息</div>
+						<div class="col-md-10 data rowHeight2x">
+							<textarea class="form-control" rows="3" placeholder="其他信息"
+								name="productDesc">${product.productDesc}</textarea>
+						</div>
 
 					</div>
 				</div>
 				<!--订单信息/--> <!--工具栏-->
 				<div class="box-tools text-center">
-					<button type="submit" class="btn bg-maroon">保存</button>
+					<button type="submit" class="btn bg-maroon">修改</button>
 					<button type="button" class="btn bg-default"
 						onclick="history.back(-1);">返回</button>
 				</div>
@@ -131,7 +173,7 @@
 			<b>Version</b> 1.0.8
 		</div>
 		<strong>Copyright &copy; 2014-2017 <a
-			href="http://www.itcast.cn">研究院研发部</a>.
+			href="http://www.baizhi.cn">研究院研发部</a>.
 		</strong> All rights reserved. </footer>
 		<!-- 底部导航 /-->
 
@@ -244,9 +286,21 @@
 			}
 		}
 
-	</script>
-	
+		$(document).ready(function() {
+			$('#datepicker-a3').datetimepicker({
+				format: "yyyy-mm-dd hh:ii",
+				autoclose: true,
+				todayBtn: true,
+				language: "zh-CN"
+			});
+		});
 
+		$(document).ready(function() {
+			// 激活导航位置
+			setSidebarActive("order-manage");
+
+		});
+	</script>
 </body>
 
 </html>

@@ -16,4 +16,9 @@ public class PermissionServiceImpl implements IPermissionService {
     public List<Permission> selectAll() {
         return permissionDao.selectAll();
     }
+
+    @Override
+    public void insertOne(Permission permission) {
+        permissionDao.insertOne(permission);
+    }
 }

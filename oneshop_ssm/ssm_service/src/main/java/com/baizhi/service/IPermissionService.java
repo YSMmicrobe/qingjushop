@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IPermissionService {
     List<Permission> selectAll();
+    //
+    void insertOne(Permission permission);
 }
