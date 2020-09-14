@@ -24,7 +24,7 @@
     -->
 	<security:http auto-config="true" use-expressions="true" >
 		<!-- 配置资料连接，表示任意路径都需要ROLE_USER权限 -->
-		<security:intercept-url pattern="/**" access="hasAnyRole(ROLE_USER)" />
+		<security:intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
 		<!-- 自定义登陆页面，login-page 自定义登陆页面
 							authentication-failure-url 用户权限校验失败之后才会跳转到这个页面，如果数据库中没有这个用户则不会跳转到这个页面。
 							default-target-url 登陆成功后跳转的页面。

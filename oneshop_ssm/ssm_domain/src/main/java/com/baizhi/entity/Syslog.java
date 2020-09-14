@@ -1,5 +1,7 @@
 package com.baizhi.entity;
 
+import com.baizhi.utils.DateUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,10 +18,11 @@ import java.util.Date;
 public class Syslog implements Serializable {
     private String id;
     private Date visitTime;
+    private String  visitTimeStr;
     private String username;
     private String ip;
     private String url;
-    private int executionTime;
+    private Long executionTime;
     private String method;
 
     public String getId() {
@@ -62,11 +65,11 @@ public class Syslog implements Serializable {
         this.url = url;
     }
 
-    public int getExecutionTime() {
+    public Long getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(int executionTime) {
+    public void setExecutionTime(Long executionTime) {
         this.executionTime = executionTime;
     }
 
@@ -76,6 +79,17 @@ public class Syslog implements Serializable {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public String getVisitTimeStr() {
+        if (visitTime != null){
+            visitTimeStr = DateUtils.date2String(visitTime,"yyyy-MM-dd HH-mm");
+        }
+        return visitTimeStr;
+    }
+
+    public void setVisitTimeStr(String visitTimeStr) {
+        this.visitTimeStr = visitTimeStr;
     }
 
     @Override
